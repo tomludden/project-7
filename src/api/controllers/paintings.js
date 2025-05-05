@@ -1,5 +1,7 @@
 const Painting = require('../models/paintings')
 
+const deleteFile = require('../../utils/deleteFile')
+
 const getPaintings = async (req, res, next) => {
   try {
     const paintings = await Painting.find({ verified: true }).populate(
@@ -37,6 +39,12 @@ const getPainting = async (req, res, next) => {
 const postPainting = async (req, res, next) => {
   try {
     const newPainting = new Painting(req.body)
+
+    if (req.file) {
+      console.log(req.file)
+      newPainting.img = req.file.path
+    }
+
     if (req.user.role === 'admin') {
       newPainting.verified = true
     } else {
@@ -56,6 +64,12 @@ const updatePainting = async (req, res, next) => {
     const newPainting = new Painting(req.body)
     newPainting._id = id
 
+    if (req.file) {
+      newPainting.img = req.file.path
+      const oldPainting = await Painting.findById(id)
+      deleteFile(oldPainting.img)
+    }
+
     const paintingUpdated = await Painting.findByIdAndUpdate(id, newPainting, {
       new: true
     })
@@ -70,6 +84,7 @@ const deletePainting = async (req, res, next) => {
   try {
     const { id } = req.params
     const paintingDeleted = await Painting.findByIdAndDelete(id)
+    deleteFile(paintingDeleted.img)
     return res.status(200).json({ message: 'Painting deleted' })
   } catch (error) {
     return res.status(400).json({ error: error.message })

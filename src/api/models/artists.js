@@ -4,7 +4,7 @@ const artistSchema = new mongoose.Schema(
   {
     artist: { type: String, required: true },
     img: { type: String, required: true },
-    paintings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Painting' }] // ✅ Correctly references Painting model
+    paintings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Painting' }]
 
     /* paintings: [
       {

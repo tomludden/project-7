@@ -1,5 +1,7 @@
 const Artist = require('../models/artists')
 
+const deleteFile = require('../../utils/deleteFile')
+
 const getArtists = async (req, res, next) => {
   try {
     const artists = await Artist.find().populate(
@@ -28,6 +30,9 @@ const getArtist = async (req, res, next) => {
 const postArtist = async (req, res, next) => {
   try {
     const newArtist = new Artist(req.body)
+    if (req.file) {
+      newArtist.img = req.file.path
+    }
     const artistSaved = await newArtist.save()
     return res.status(201).json(artistSaved)
   } catch (error) {
@@ -38,10 +43,25 @@ const postArtist = async (req, res, next) => {
 const updateArtist = async (req, res, next) => {
   try {
     const { id } = req.params
-    const newArtist = new Artist(req.body)
-    newArtist._id = id
+    const oldArtist = await Artist.findById(id)
+    if (!oldArtist) {
+      return res.status(400).json({ error: 'Artist not found' })
+    }
 
-    const artistUpdated = await Artist.findByIdAndUpdate(id, newArtist, {
+    const updatedFields = { ...req.body }
+
+    if (req.body.paintings) {
+      updatedFields.paintings = [...oldArtist.paintings, ...req.body.paintings]
+    }
+
+    if (req.file) {
+      updatedFields.img = req.file.path
+      if (oldArtist.img) {
+        deleteFile(oldArtist.img)
+      }
+    }
+
+    const artistUpdated = await Artist.findByIdAndUpdate(id, updatedFields, {
       new: true
     })
 
@@ -55,7 +75,8 @@ const deleteArtist = async (req, res, next) => {
   try {
     const { id } = req.params
     const artistDeleted = await Artist.findByIdAndDelete(id)
-    return res.status(200).json({ message: 'Artist eliminado' })
+    deleteFile(artistDeleted.img)
+    return res.status(200).json({ message: 'Artist deleted' })
   } catch (error) {
     return res.status(400).json({ error: error.message })
   }

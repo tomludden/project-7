@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const paintingSchema = new mongoose.Schema(
   {
     painting: { type: String, required: true },
-    artist: { type: mongoose.Schema.Types.ObjectId, ref: 'Artist' }, // ✅ singular, consistent with populate()
+    artist: { type: mongoose.Schema.Types.ObjectId, ref: 'Artist' },
     img: { type: String, required: true },
     year: { type: Number, required: true },
     category: [
@@ -28,7 +28,7 @@ const paintingSchema = new mongoose.Schema(
     ],
     verified: { type: Boolean, required: true, default: false }
   },
-  { timestamps: true } // ✅ properly placed schema options
+  { timestamps: true }
 )
 
 const Painting = mongoose.model('Painting', paintingSchema, 'paintings')
