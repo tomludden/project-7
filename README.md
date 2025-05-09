@@ -76,7 +76,7 @@ Authorization: Bearer <token>
 GET /api/v1/users -- List all users\
 GET /api/v1/users/:id -- Get user by ID\
 PUT /api/v1/users/:id -- Update user role\
-DELETE /api/v1/users/:id -- Delete a user\ (admin can delete any user and a users can delete themselves if authenticated)
+DELETE /api/v1/users/:id -- Delete a user (admin can delete any user and a users can delete themselves if authenticated)
 
 ### Artists
 
