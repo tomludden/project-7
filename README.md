@@ -28,6 +28,7 @@ A RESTful API for managing a digital art gallery with **artists, paintings**, an
 -- jwt.js -- # JWT signing/verification\
 **-/middlewares**\
 -- auth.js -- # Auth middleware\
+-- file.js -- # Multer (cloudinary) file upload middleware\
 **-/utils**\
 --/seeds -- # Seed scripts\
 **/data** -- # JSON seed data\
