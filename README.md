@@ -31,7 +31,7 @@ A RESTful API for managing a digital art gallery with **artists, paintings**, an
 **-/utils**\
 --/seeds -- # Seed scripts\
 **/data** -- # JSON seed data\
-**index.js** -- # App entry pointº
+**index.js** -- # App entry point
 
 ---
 
@@ -39,13 +39,13 @@ A RESTful API for managing a digital art gallery with **artists, paintings**, an
 
 ### 1. Clone and install
 
-git clone https://github.com/tomludden/project-7.git\
+git clone https://github.com/tomludden/project-7.git \
 cd project-7\
 npm install
 
 ### 2. Environment Setup
 
-Create a .env file:\
+Create a .env file:
 
 PORT=3000\
 DB_URL=mongodb+srv://<username>:<password>@cluster.mongodb.net/gallery\
@@ -64,7 +64,7 @@ npm run dev (Runs on: http://localhost:3000)
 ### Auth
 
 POST /api/V1/users/register -- Register new user (role: user by default)\
-POST /api/V1/users/login -- Login, returns JWT token\
+POST /api/V1/users/login -- Login, returns JWT token
 
 Use the token in header:\
 Authorization: Bearer <token>
@@ -133,10 +133,10 @@ Authorization: Bearer <your_token>
 Content-Type: application/json
 
 {
-"painting": "Starry Night",
-"img": "https://link.to/image.jpg",
-"year": 1889,
-"category": ["Post-Impressionism"],
+"painting": "Starry Night", \
+"img": "https://link.to/image.jpg", \
+"year": 1889, \
+"category": ["Post-Impressionism"], \
 "artist": "66112233abcde01234567890"
 }
 
