@@ -73,30 +73,30 @@ Authorization: Bearer <token>
 
 ###### Method -- Route -- Description
 
-GET /api/v1/users -- List all users
-GET /api/v1/users/:id -- Get user by ID
-PUT /api/v1/users/:id -- Update user role
-DELETE /api/v1/users/:id -- Delete a user (admin can delete any user and a users can delete themselves if authenticated)
+GET /api/v1/users -- List all users\
+GET /api/v1/users/:id -- Get user by ID\
+PUT /api/v1/users/:id -- Update user role\
+DELETE /api/v1/users/:id -- Delete a user\ (admin can delete any user and a users can delete themselves if authenticated)
 
 ### Artists
 
 ###### Method -- Route -- Access -- Description
 
-GET /api/v1/artists -- Public -- Get all artists
-GET /api/v1/artists/:id -- Public -- Get a single artist
-POST /api/v1/artists -- Admin Only -- Create new artist
-PUT /api/v1/artists/:id -- Admin Only -- Update an artist
+GET /api/v1/artists -- Public -- Get all artists\
+GET /api/v1/artists/:id -- Public -- Get a single artist\
+POST /api/v1/artists -- Admin Only -- Create new artist\
+PUT /api/v1/artists/:id -- Admin Only -- Update an artist\
 DELETE /api/v1/artists/:id -- Admin Only -- Delete an artist
 
 ### Paintings
 
 ###### Method -- Route -- Access -- Description
 
-GET /api/v1/paintings -- Public -- Get all verified paintings
-GET /api/v1/paintings/:id -- Public -- Get one painting
-GET /api/v1/paintings/unverified -- Admin Only -- Get all unverified paintings
-POST /api/v1/paintings -- Auth -- Submit new painting (auto-verifies if admin)
-PUT /api/v1/paintings/:id -- Admin Only -- Update a painting
+GET /api/v1/paintings -- Public -- Get all verified paintings\
+GET /api/v1/paintings/:id -- Public -- Get one painting\
+GET /api/v1/paintings/unverified -- Admin Only -- Get all unverified paintings\
+POST /api/v1/paintings -- Auth -- Submit new painting (auto-verifies if admin)\
+PUT /api/v1/paintings/:id -- Admin Only -- Update a painting\
 DELETE /api/v1/paintings/:id -- Admin Only -- Delete a painting
 
 ---
@@ -105,8 +105,8 @@ DELETE /api/v1/paintings/:id -- Admin Only -- Delete a painting
 
 You can seed mock data using:
 
-./src/utils/seeds/artistSeed.js
-./src/utils/seeds/paintingSeed.js
+./src/utils/seeds/artistSeed.js\
+./src/utils/seeds/paintingSeed.js\
 ./src/utils/seeds/userSeed.js
 
 ###### Note: One admin user is preserved during user seeding (\_id: 68161176f57313443ce20393)
@@ -117,7 +117,7 @@ You can seed mock data using:
 
 ### Role Abilities
 
-**user** -- View paintings, create paintings
+**user** -- View paintings, create paintings\
 **admin** -- Full control over all resources
 
 ###### Middleware: isAuth, isAdmin
