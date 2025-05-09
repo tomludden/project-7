@@ -39,8 +39,8 @@ A RESTful API for managing a digital art gallery with **artists, paintings**, an
 
 ### 1. Clone and install
 
-git clone https://github.com/your-username/art-gallery-api.git
-cd art-gallery-api
+git clone https://github.com/tomludden/project-7.git
+cd project-7
 npm install
 
 ### 2. Environment Setup
