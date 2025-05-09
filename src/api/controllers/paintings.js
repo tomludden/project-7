@@ -8,7 +8,7 @@ const getPaintings = async (req, res, next) => {
     )
     return res.status(200).json(paintings)
   } catch (error) {
-    return res.status(400).json({ error: error.message })
+    return res.status(400).json({ message: 'Paintings not found' })
   }
 }
 
@@ -20,7 +20,7 @@ const getPaintingsUnverified = async (req, res, next) => {
     )
     return res.status(200).json(paintings)
   } catch (error) {
-    return res.status(400).json({ error: error.message })
+    return res.status(400).json({ message: 'Unverified paintings not found' })
   }
 }
 
@@ -30,7 +30,7 @@ const getPainting = async (req, res, next) => {
     const painting = await Painting.findById(id).populate('artist', 'artist')
     return res.status(200).json(painting)
   } catch (error) {
-    return res.status(400).json({ error: error.message })
+    return res.status(400).json({ message: 'Painting not found' })
   }
 }
 
@@ -46,7 +46,7 @@ const postPainting = async (req, res, next) => {
     const paintingSaved = await newPainting.save()
     return res.status(201).json(paintingSaved)
   } catch (error) {
-    return res.status(400).json({ error: error.message })
+    return res.status(400).json({ message: 'Painting not saved' })
   }
 }
 
@@ -62,7 +62,7 @@ const updatePainting = async (req, res, next) => {
 
     return res.status(200).json(paintingUpdated)
   } catch (error) {
-    return res.status(400).json({ error: error.message })
+    return res.status(400).json({ message: 'Painting not updated' })
   }
 }
 
@@ -72,7 +72,7 @@ const deletePainting = async (req, res, next) => {
     const paintingDeleted = await Painting.findByIdAndDelete(id)
     return res.status(200).json({ message: 'Painting deleted' })
   } catch (error) {
-    return res.status(400).json({ error: error.message })
+    return res.status(400).json({ message: 'Painting not deleted' })
   }
 }
 

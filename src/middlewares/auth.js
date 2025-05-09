@@ -16,7 +16,7 @@ const isAuth = async (req, res, next) => {
     req.user = user
     next()
   } catch (error) {
-    return res.status(400).json('Not authorised')
+    return res.status(400).json('Not authorised, token needed')
   }
 }
 
@@ -45,9 +45,7 @@ const isAdmin = async (req, res, next) => {
 
     next()
   } catch (error) {
-    return res
-      .status(400)
-      .json({ message: 'Invalid token', error: error.message })
+    return res.status(400).json({ message: 'Invalid token' })
   }
 }
 

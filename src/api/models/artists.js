@@ -4,30 +4,7 @@ const artistSchema = new mongoose.Schema(
   {
     artist: { type: String, required: true },
     img: { type: String, required: true },
-    paintings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Painting' }] // ✅ Correctly references Painting model
-
-    /* paintings: [
-      {
-        type: String,
-        required: true,
-        enum: [
-          'Vincent van Gogh',
-          'Salvador Dalí',
-          'Pablo Picasso',
-          'Leonardo da Vinci',
-          'Edvard Munch',
-          'Grant Wood',
-          'Johannes Vermeer',
-          'Gustav Klimt',
-          'Rembrandt',
-          'Claude Monet',
-          'Frida Kahlo',
-          'Georges Seurat',
-          'John Everett Millais',
-          'Wassily Kandinsky'
-        ]
-      }
-    ] */
+    paintings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Painting' }]
   },
   { timestamps: true }
 )

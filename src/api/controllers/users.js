@@ -7,7 +7,7 @@ const getUsers = async (req, res, next) => {
     const users = await User.find()
     return res.status(200).json(users)
   } catch (error) {
-    return res.status(400).json({ error: error.message })
+    return res.status(400).json({ message: 'Error getting users' })
   }
 }
 
@@ -17,7 +17,7 @@ const getUser = async (req, res, next) => {
     const user = await User.findById(id)
     return res.status(200).json(user)
   } catch (error) {
-    return res.status(400).json({ error: error.message })
+    return res.status(400).json({ message: 'User not found' })
   }
 }
 
@@ -28,20 +28,18 @@ const updateUser = async (req, res, next) => {
       { role: req.body.role },
       { new: true }
     )
-    res.json(updatedUser)
+    return res.status(200).json({
+      message: 'User updated',
+      user: updatedUser
+    })
   } catch (err) {
-    res.status(400).json({ error: err.message })
+    res.status(400).json({ message: 'User not updated' })
   }
 }
 
 const register = async (req, res, next) => {
   try {
     const { userName, password } = req.body
-    const newUser = new User({
-      userName: req.body.userName,
-      password: req.body.password,
-      role: req.body.role
-    })
 
     const duplicateUser = await User.findOne({ userName })
     if (duplicateUser) {
@@ -50,10 +48,16 @@ const register = async (req, res, next) => {
         .json({ message: 'User already exists, choose another name' })
     }
 
+    const newUser = new User({
+      userName,
+      password,
+      role: 'user'
+    })
+
     const savedUser = await newUser.save()
     return res.status(201).json(savedUser)
   } catch (error) {
-    return res.status(400).json({ error: error.message })
+    return res.status(400).json({ message: 'User not created' })
   }
 }
 
@@ -76,10 +80,24 @@ const login = async (req, res, next) => {
   }
 }
 
+const deleteUser = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const deletedUser = await User.findByIdAndDelete(id)
+    return res.status(200).json({
+      message: 'User deleted',
+      user: deletedUser
+    })
+  } catch (error) {
+    return res.status(400).json({ message: 'User not deleted' })
+  }
+}
+
 module.exports = {
   getUsers,
   getUser,
   updateUser,
+  deleteUser,
   register,
   login
 }
