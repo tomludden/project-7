@@ -18,20 +18,20 @@ A RESTful API for managing a digital art gallery with **artists, paintings**, an
 
 ## Project Structure
 
-**/src**
-**-/api**
---/controllers -- # Business logic
---/models -- # Mongoose schemas
---/routes -- # Route declarations
-**-/config**
--- db.js -- # Database config
--- jwt.js -- # JWT signing/verification
-**-/middlewares**
--- auth.js -- # Auth middleware
-**-/utils**
---/seeds -- # Seed scripts
-**/data** -- # JSON seed data
-**index.js** -- # App entry point
+**/src**\
+**-/api**\
+--/controllers -- # Business logic\
+--/models -- # Mongoose schemas\
+--/routes -- # Route declarations\
+**-/config**\
+-- db.js -- # Database config\
+-- jwt.js -- # JWT signing/verification\
+**-/middlewares**\
+-- auth.js -- # Auth middleware\
+**-/utils**\
+--/seeds -- # Seed scripts\
+**/data** -- # JSON seed data\
+**index.js** -- # App entry pointº
 
 ---
 
@@ -39,16 +39,16 @@ A RESTful API for managing a digital art gallery with **artists, paintings**, an
 
 ### 1. Clone and install
 
-git clone https://github.com/tomludden/project-7.git
-cd project-7
+git clone https://github.com/tomludden/project-7.git\
+cd project-7\
 npm install
 
 ### 2. Environment Setup
 
-Create a .env file:
+Create a .env file:\
 
-PORT=3000
-DB_URL=mongodb+srv://<username>:<password>@cluster.mongodb.net/gallery
+PORT=3000\
+DB_URL=mongodb+srv://<username>:<password>@cluster.mongodb.net/gallery\
 JWT_SECRET=your_secret_key
 
 ---
@@ -63,10 +63,10 @@ npm run dev (Runs on: http://localhost:3000)
 
 ### Auth
 
-POST /api/V1/users/register -- Register new user (role: user by default)
-POST /api/V1/users/login -- Login, returns JWT token
+POST /api/V1/users/register -- Register new user (role: user by default)\
+POST /api/V1/users/login -- Login, returns JWT token\
 
-Use the token in header:
+Use the token in header:\
 Authorization: Bearer <token>
 
 ### Users (Admin Only)
