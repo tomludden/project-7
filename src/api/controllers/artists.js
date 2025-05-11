@@ -1,7 +1,5 @@
 const Artist = require('../models/artists')
 
-const deleteFile = require('../../utils/deleteFile')
-
 const getArtists = async (req, res, next) => {
   try {
     const artists = await Artist.find().populate(

@@ -13,10 +13,10 @@ const userSeedData = async () => {
       .listCollections({ name: 'users' })
       .toArray()
 
-    const keepUserIds = ['68161176f57313443ce20393']
+    const keepUserId = ['68161176f57313443ce20393']
 
     if (collectionExists.length > 0) {
-      await User.deleteMany({ _id: { $nin: keepUserIds } })
+      await User.deleteMany({ _id: { $nin: keepUserId } })
       console.log('All users deleted except the specified ones.')
     }
 

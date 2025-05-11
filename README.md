@@ -117,7 +117,7 @@ You can seed mock data using:
 
 ### Role Abilities
 
-**user** -- View paintings, create paintings\
+**user** -- View paintings, create paintings, delete themselves\
 **admin** -- Full control over all resources
 
 ###### Middleware: isAuth, isAdmin

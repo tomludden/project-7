@@ -1,7 +1,5 @@
 const Painting = require('../models/paintings')
 
-const deleteFile = require('../../utils/deleteFile')
-
 const getPaintings = async (req, res, next) => {
   try {
     const paintings = await Painting.find({ verified: true }).populate(

@@ -83,6 +83,13 @@ const login = async (req, res, next) => {
 const deleteUser = async (req, res, next) => {
   try {
     const { id } = req.params
+    const currentUser = req.user
+
+    if (currentUser.role !== 'admin' && currentUser._id.toString() !== id) {
+      return res
+        .status(400)
+        .json({ message: 'Forbidden: You can only delete your own account' })
+    }
     const deletedUser = await User.findByIdAndDelete(id)
     return res.status(200).json({
       message: 'User deleted',
