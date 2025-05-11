@@ -1,4 +1,3 @@
-const dotenv = require('dotenv')
 const jwt = require('jsonwebtoken')
 const User = require('../api/models/users')
 const { verifyJwt } = require('../config/jwt')

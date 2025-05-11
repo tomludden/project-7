@@ -39,9 +39,9 @@ const updateUser = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   try {
-    const { userName, password } = req.body
+    const { username, password } = req.body
 
-    const duplicateUser = await User.findOne({ userName })
+    const duplicateUser = await User.findOne({ username })
     if (duplicateUser) {
       return res
         .status(400)
@@ -49,13 +49,13 @@ const register = async (req, res, next) => {
     }
 
     const newUser = new User({
-      userName,
+      username,
       password,
       role: 'user'
     })
 
     const savedUser = await newUser.save()
-    return res.status(201).json(savedUser)
+    return res.status(200).json(savedUser)
   } catch (error) {
     return res.status(400).json({ message: 'User not created' })
   }
@@ -63,9 +63,9 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    const { userName, password } = req.body
+    const { username, password } = req.body
 
-    const user = await User.findOne({ userName })
+    const user = await User.findOne({ username })
 
     if (!user) {
       return res.status(400).json({ message: 'User not found' })
@@ -76,7 +76,7 @@ const login = async (req, res, next) => {
       return res.status(200).json({ user, token })
     }
   } catch (error) {
-    return res.status(400).json({ error: error.message })
+    return res.status(400).json({ message: 'Not authorised, token needed' })
   }
 }
 
