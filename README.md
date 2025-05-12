@@ -109,6 +109,8 @@ You can seed mock data using:
 ./src/utils/seeds/paintingSeed.js\
 ./src/utils/seeds/userSeed.js
 
+**Run in this order, then npm run dev**
+
 ###### Note: One admin user is preserved during user seeding (\_id: 68161176f57313443ce20393)
 
 ---
