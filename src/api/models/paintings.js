@@ -3,7 +3,11 @@ const mongoose = require('mongoose')
 const paintingSchema = new mongoose.Schema(
   {
     painting: { type: String, required: true },
-    artist: { type: mongoose.Schema.Types.ObjectId, ref: 'Artist' },
+    artist: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Artist',
+      required: true
+    },
     img: { type: String, required: true },
     year: { type: Number, required: true },
     category: [
@@ -30,6 +34,7 @@ const paintingSchema = new mongoose.Schema(
   },
   { timestamps: true }
 )
+paintingSchema.index({ album: 1, artist: 1 }, { unique: true })
 
 const Painting = mongoose.model('Painting', paintingSchema, 'paintings')
 
