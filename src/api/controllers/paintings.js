@@ -57,7 +57,7 @@ const postPainting = async (req, res, next) => {
     }
 
     const newPainting = new Painting({
-      Painting,
+      painting,
       img,
       year,
       category,
