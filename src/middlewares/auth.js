@@ -4,47 +4,53 @@ const { verifyJwt } = require('../config/jwt')
 
 const isAuth = async (req, res, next) => {
   try {
-    const token = req.headers.authorization
-    const parsedToken = token.replace('Bearer ', '')
+    const authHeader = req.headers.authorization
 
-    const { id } = verifyJwt(parsedToken)
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res
+        .status(401)
+        .json({ message: 'Authorization header missing or malformed' })
+    }
+
+    const token = authHeader.split(' ')[1]
+    const { id } = verifyJwt(token)
 
     const user = await User.findById(id)
 
-    user.password = null
+    if (!user) {
+      return res
+        .status(401)
+        .json({ message: 'User not found or no longer exists' })
+    }
+    user.password = undefined
     req.user = user
     next()
   } catch (error) {
-    return res.status(400).json('Not authorised, token needed')
+    console.error('Auth error:', error.message)
+    return res
+      .status(401)
+      .json({ message: 'Not authorized..Invalid or expired token.' })
   }
 }
 
-const isAdmin = async (req, res, next) => {
+const isAdmin = (req, res, next) => {
   try {
-    const token = req.headers.authorization?.replace('Bearer ', '')
-    if (!token) {
-      return res.status(400).json({ message: 'No token provided' })
-    }
+    const user = req.user
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
-
-    const user = await User.findById(decoded.id)
     if (!user) {
-      return res.status(400).json({ message: 'User not found' })
+      return res.status(401).json({ message: 'Not authenticated' })
     }
 
     if (user.role !== 'admin') {
       return res
-        .status(400)
+        .status(403)
         .json({ message: 'Only admins can perform this action' })
     }
 
-    user.password = undefined
-    req.user = user
-
     next()
   } catch (error) {
-    return res.status(400).json({ message: 'Invalid token' })
+    console.error('isAdmin error:', error.message)
+    return res.status(500).json({ message: 'Internal server error' })
   }
 }
 

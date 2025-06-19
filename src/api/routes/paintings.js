@@ -13,9 +13,9 @@ const paintingRouter = require('express').Router()
 
 paintingRouter.get('/:id', getPainting)
 paintingRouter.get('/', getPaintings)
-paintingRouter.get('/unverified', [isAdmin], getPaintingsUnverified)
+paintingRouter.get('/unverified', [isAuth, isAdmin], getPaintingsUnverified)
 paintingRouter.post('/', [isAuth], postPainting)
-paintingRouter.put('/:id', [isAdmin], updatePainting)
-paintingRouter.delete('/:id', [isAdmin], deletePainting)
+paintingRouter.put('/:id', [isAuth, isAdmin], updatePainting)
+paintingRouter.delete('/:id', [isAuth, isAdmin], deletePainting)
 
 module.exports = paintingRouter

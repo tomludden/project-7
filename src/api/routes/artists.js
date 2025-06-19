@@ -12,8 +12,8 @@ const artistRouter = require('express').Router()
 
 artistRouter.get('/:id', getArtist)
 artistRouter.get('/', getArtists)
-artistRouter.post('/', [isAdmin], postArtist)
-artistRouter.put('/:id', [isAdmin], updateArtist)
-artistRouter.delete('/:id', [isAdmin], deleteArtist)
+artistRouter.post('/', [isAuth, isAdmin], postArtist)
+artistRouter.put('/:id', [isAuth, isAdmin], updateArtist)
+artistRouter.delete('/:id', [isAuth, isAdmin], deleteArtist)
 
 module.exports = artistRouter

@@ -11,11 +11,11 @@ const {
   login
 } = require('../controllers/users')
 
-userRoutes.get('/', [isAdmin], getUsers)
-userRoutes.get('/:id', [isAdmin], getUser)
-userRoutes.put('/:id', [isAdmin], updateUser)
+userRoutes.get('/', [isAuth, isAdmin], getUsers)
+userRoutes.get('/:id', [isAuth, isAdmin], getUser)
+userRoutes.put('/:id', [isAuth, isAdmin], updateUser)
 userRoutes.post('/register', register)
 userRoutes.post('/login', login)
-userRoutes.delete('/:id', [isAuth], deleteUser)
+userRoutes.delete('/:id', [isAuth, isAdmin], deleteUser)
 
 module.exports = userRoutes
